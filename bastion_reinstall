@@ -1,0 +1,24 @@
+---	
+### bastion 이슈로 bastion 재설치시**.	
+```
+
+
+
+
+1.VM ware에서 동일 Vm 설치 (기존 bastion vm을 vcenter 에서 확인한뒤 사양과 설정을 체크 한다.)
+2.설치 완료후 VM natwork 확인 (VM에 있는 네트워크 어뎁터가 DirectPath I/O 체크 해제 되어야 한다. 링크 : https://docs.vmware.com/kr/VMware-vSphere/7.0/com.vmware.vsphere.networking.doc/GUID-BF2770C3-39ED-4BC5-A8EF-77D55EFE924C.html)
+3.네트워크 설정(네트워크 구성에 맞게, GW, DNS 등 설정)
+4.네트워크 설정 완료후 repo 설정(기존 repo 설정 참조)
+5.repo 설정후 OC 설치 및 haproxy 설정 (기존 git 참조)
+
+6.firewall 설정
+[root@bastion ~]# firewall-cmd --zone=public --add-port=6443/tcp
+success
+[root@bastion ~]# firewall-cmd --zone=public --add-port=22623/tcp
+success
+[root@bastion ~]# firewall-cmd --permanent --zone=public --add-port=6443/tcp
+success
+[root@bastion ~]# firewall-cmd --permanent --zone=public --add-port=22623/tcp
+
+	
+```
